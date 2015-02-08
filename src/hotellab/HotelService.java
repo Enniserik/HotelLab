@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hotellab;
 
-import java.io.IOException;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -22,23 +15,47 @@ public class HotelService {
         dao = new HotelDAOStrategy();
     }
     
-    public void displayAllHotels() throws IOException{
-        try{
-            List<Hotel> hotels = dao.findAllHotels();
-            for(Hotel h : hotels){
-                System.out.println(h);
-            }
-        } catch(SQLException sqle){
-            System.out.println("Something went wrong with SQL.");
-        } catch(ClassNotFoundException cnfe){
-            System.out.println("Something went wrong with the Driver.");
+    public void displayAllHotels() {
+        List<Hotel> hotels = dao.findAllHotels();
+        for(Hotel h : hotels){
+            System.out.println(h);
         }
+    }
+    
+    public void updateHotelRecord() {
+
+        dao.updateHotelRecord(1, "notes", "Nothing quite as dank.");
+        System.out.println("Record Updated");
         
     }
     
-    public void updateHotelRecord() throws SQLException, ClassNotFoundException{
-        dao.updateHotelRecord();
-        System.out.println("Record Updated");
+    public void insertHotelRecord() {
+        
+        List<String> colNames = new ArrayList<>();
+        List values = new ArrayList();
+        
+        colNames.add("hotel_name");
+        colNames.add("street_address");
+        colNames.add("city");
+        colNames.add("state");
+        colNames.add("postal_code");
+        colNames.add("notes");
+        
+        values.add("TacoLand");
+        values.add("535 Taco Way");
+        values.add("Las Vegas");
+        values.add("Nevada");
+        values.add("57335");
+        values.add("A place for tacos and taco lovers.");
+        
+        dao.insertHotelRecord(colNames, values);
+        
+    }
+    
+    public void deleteHotelRecord() { 
+    
+        dao.deleteHotelRecord(3);
+        
     }
     
 }

@@ -1,13 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hotellab;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +25,7 @@ public class HotelDAOStrategy implements HotelDAO {
     }
     
     @Override
-    public List<Hotel> findAllHotels() throws SQLException, ClassNotFoundException{
+    public List<Hotel> findAllHotels() {
         
         dba.openConnection(driver, url, username, password);
         List<Map<String, Object>> records = dba.findAllRecords("hotel");
@@ -60,14 +52,35 @@ public class HotelDAOStrategy implements HotelDAO {
     }
     
     @Override
-    public int updateHotelRecord() throws SQLException, ClassNotFoundException {
+    public int updateHotelRecord(int pk, String col, String value) {
         
         dba.openConnection(driver, url, username, password);
-        int updates = dba.updateRecords("hotel", "hotel_id", 1, "state", "Alabama");
+        int updates = dba.updateRecord("hotel", "hotel_id", pk, col, value);
     
         return updates;
         
     }
+    
+    @Override
+    public int insertHotelRecord(List<String> colNames, List values) {
+        
+        dba.openConnection(driver, url, username, password);
+        int updates = dba.insertRecord("hotel", colNames, values);
+        
+        return updates;
+        
+    }
+    
+    @Override
+    public int deleteHotelRecord(int pk) {
+        
+        dba.openConnection(driver, url, username, password);
+        int updates = dba.deleteRecord("hotel", "hotel_id", pk);
+        
+        return updates;
+        
+    }
+    
     
 //    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 //        HotelDAO db = new HotelDAOStrategy();

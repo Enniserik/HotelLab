@@ -1,6 +1,5 @@
 package hotellab;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -10,12 +9,12 @@ import java.util.Map;
  */
 public interface DBAccess {
 
-    public abstract void openConnection(String driverName, String url, String userName, String password) throws SQLException, ClassNotFoundException;
-    public abstract void closeConnection() throws SQLException;
+    public abstract void openConnection(String driverName, String url, String userName, String password);
+    public abstract void closeConnection();
     
     public abstract List<Map<String, Object>> findAllRecords(String tableName);
-    public abstract int deleteRecords();  
-    public abstract int insertRecords(); 
-    public abstract int updateRecords(String tableName, String pkKey, int pk, String colName, Object value);
+    public abstract int deleteRecord(String tableName, String pkKey, int pk);  
+    public abstract int insertRecord(String tableName, List<String> colNames, List values); 
+    public abstract int updateRecord(String tableName, String pkKey, int pk, String colName, Object value);
     
 }

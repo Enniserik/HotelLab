@@ -1,15 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hotellab;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -17,7 +8,10 @@ import java.util.Map;
  */
 public interface HotelDAO {
 
-    public abstract List<Hotel> findAllHotels() throws SQLException, ClassNotFoundException, FileNotFoundException, IOException;
-    public abstract int updateHotelRecord() throws SQLException, ClassNotFoundException;
+    public abstract List<Hotel> findAllHotels();
+    public abstract int updateHotelRecord(int pk, String col, String value);
+    public abstract int deleteHotelRecord(int pk);
+    public abstract int insertHotelRecord(List<String> colNames, List values);
+    
     
 }

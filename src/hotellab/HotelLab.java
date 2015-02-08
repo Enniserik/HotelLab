@@ -1,8 +1,5 @@
 package hotellab;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 /**
  *
  * @author eennis
@@ -12,17 +9,34 @@ public class HotelLab {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+    public static void main(String[] args){
         
         HotelService hs = new HotelService();
         
-        hs.displayAllHotels();
+        //Display initial data
+        hs.displayAllHotels(); 
+        System.out.println("\n");
         
+        //Add note to first hotel record
         hs.updateHotelRecord();
         
-        hs.displayAllHotels();
+        //Display updated data
+        hs.displayAllHotels(); 
+        System.out.println("\n");
         
+        //Add a new record
+        hs.insertHotelRecord();
         
+        //Display records again
+        hs.displayAllHotels(); 
+        System.out.println("\n");
+        
+        //Delete the new record
+        hs.deleteHotelRecord();
+        
+        //Finally, display the data again
+        hs.displayAllHotels(); 
+        System.out.println("\n");
         
     }
     

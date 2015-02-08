@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hotellab;
 
 import java.io.File;
@@ -35,9 +30,9 @@ public class HotelDataAccessFactory {
         s = props.getProperty("driver");
         
         }catch(FileNotFoundException fnfe){
-            
+            System.out.println("File not found.");
         }catch(IOException ioe){
-            
+            System.out.println(ioe.getMessage());
         }
         
         
@@ -63,9 +58,9 @@ public class HotelDataAccessFactory {
         s = props.getProperty("url");
         
         }catch(FileNotFoundException fnfe){
-            
+            System.out.println("File not found.");
         }catch(IOException ioe){
-            
+            System.out.println(ioe.getMessage());
         }
         
         return s;
@@ -90,9 +85,9 @@ public class HotelDataAccessFactory {
         s = props.getProperty("username");
         
         }catch(FileNotFoundException fnfe){
-            
+            System.out.println("File not found.");
         }catch(IOException ioe){
-            
+            System.out.println(ioe.getMessage());
         }
         
         return s;
@@ -117,9 +112,9 @@ public class HotelDataAccessFactory {
         s = props.getProperty("password");
         
         }catch(FileNotFoundException fnfe){
-            
+            System.out.println("File not found.");
         }catch(IOException ioe){
-            
+            System.out.println(ioe.getMessage());
         }
         
         return s;
