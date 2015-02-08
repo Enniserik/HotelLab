@@ -2,15 +2,17 @@ package hotellab;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.sql.Timestamp;
 /**
  *
  * @author eennis
@@ -64,9 +66,45 @@ public class DBStrategyMySQL implements DBAccess {
         return records;
     }
     
+    //UPDATE `hotel`.`hotel` SET `city`='Moors' WHERE `hotel_id`='1';
     @Override
-    public int updateRecords(){
-        return 0;
+    public int updateRecords(String tableName, String pkKey, int pk, String colName, Object value){
+        
+        int updates = 0;
+        PreparedStatement pstmt = null;
+        
+        try{
+            
+            Object x = null;
+            
+            if(value instanceof String){
+                x = (String)value;
+            }else if(value instanceof Integer){
+                x = (Integer)value;
+            }else if(value instanceof Double){
+                x = (Double)value;
+            }else if(value instanceof Long){
+                x = (Long)value;
+            }else if(value instanceof Timestamp){
+                x = (Timestamp)value;
+            }else if(value instanceof Date){
+                x = (Date)value;
+            }else{
+                x = (Boolean)value;
+            }
+            
+            String sql = "UPDATE " + tableName + " SET " + colName + " = '" + x + "' WHERE " + pkKey + " = " + pk;
+            pstmt = conn.prepareStatement(sql);
+            updates = pstmt.executeUpdate();
+            
+            pstmt.close();
+            closeConnection();
+            
+        }catch(SQLException sqle){
+            
+        }
+        
+        return updates;
     }
     
     @Override
@@ -82,10 +120,13 @@ public class DBStrategyMySQL implements DBAccess {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DBAccess db = new DBStrategyMySQL();
         db.openConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/hotel","root","admin");
+        int x = db.updateRecords("hotel", "hotel_id", 1, "state", "Alabama");
+        db.openConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/hotel","root","admin");
         List<Map<String, Object>> hotels = db.findAllRecords("hotel");
         for(Map m : hotels){
             System.out.println(m);
         }
+        
     }
     
 }

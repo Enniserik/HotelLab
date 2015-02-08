@@ -5,6 +5,7 @@
  */
 package hotellab;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class HotelService {
         dao = new HotelDAOStrategy();
     }
     
-    public void displayAllHotels(){
+    public void displayAllHotels() throws IOException{
         try{
             List<Hotel> hotels = dao.findAllHotels();
             for(Hotel h : hotels){
@@ -33,6 +34,11 @@ public class HotelService {
             System.out.println("Something went wrong with the Driver.");
         }
         
+    }
+    
+    public void updateHotelRecord() throws SQLException, ClassNotFoundException{
+        dao.updateHotelRecord();
+        System.out.println("Record Updated");
     }
     
 }

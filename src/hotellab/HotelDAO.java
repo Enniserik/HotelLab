@@ -5,6 +5,8 @@
  */
 package hotellab;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,7 @@ import java.util.Map;
  */
 public interface HotelDAO {
 
-    public abstract List<Hotel> findAllHotels() throws SQLException, ClassNotFoundException;
+    public abstract List<Hotel> findAllHotels() throws SQLException, ClassNotFoundException, FileNotFoundException, IOException;
+    public abstract int updateHotelRecord() throws SQLException, ClassNotFoundException;
     
 }

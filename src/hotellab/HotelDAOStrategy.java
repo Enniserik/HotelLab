@@ -5,6 +5,8 @@
  */
 package hotellab;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +19,23 @@ import java.util.Map;
 public class HotelDAOStrategy implements HotelDAO {
     
     private DBAccess dba;
+    private String driver;
+    private String url;
+    private String username;
+    private String password;
     
     public HotelDAOStrategy(){
         dba = new DBStrategyMySQL();
+        driver = HotelDataAccessFactory.getDriver();
+        url = HotelDataAccessFactory.getUrl();
+        username = HotelDataAccessFactory.getUsername();
+        password = HotelDataAccessFactory.getPassword();
     }
     
     @Override
-    public List<Hotel> findAllHotels() throws SQLException, ClassNotFoundException {
+    public List<Hotel> findAllHotels() throws SQLException, ClassNotFoundException{
         
-        dba.openConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/hotel","root","admin");
+        dba.openConnection(driver, url, username, password);
         List<Map<String, Object>> records = dba.findAllRecords("hotel");
         List<Hotel> hotels = new ArrayList<>();
         Hotel h = null;
@@ -47,6 +57,16 @@ public class HotelDAOStrategy implements HotelDAO {
             hotels.add(h);
         }
         return hotels;
+    }
+    
+    @Override
+    public int updateHotelRecord() throws SQLException, ClassNotFoundException {
+        
+        dba.openConnection(driver, url, username, password);
+        int updates = dba.updateRecords("hotel", "hotel_id", 1, "state", "Alabama");
+    
+        return updates;
+        
     }
     
 //    public static void main(String[] args) throws SQLException, ClassNotFoundException {

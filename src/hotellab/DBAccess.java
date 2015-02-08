@@ -16,6 +16,6 @@ public interface DBAccess {
     public abstract List<Map<String, Object>> findAllRecords(String tableName);
     public abstract int deleteRecords();  
     public abstract int insertRecords(); 
-    public abstract int updateRecords();
+    public abstract int updateRecords(String tableName, String pkKey, int pk, String colName, Object value);
     
 }
