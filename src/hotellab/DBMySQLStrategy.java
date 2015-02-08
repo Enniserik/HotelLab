@@ -17,7 +17,7 @@ import java.sql.Timestamp;
  *
  * @author eennis
  */
-public class DBStrategyMySQL implements DBAccess {
+public class DBMySQLStrategy implements DBAccess {
     
     private Connection conn;
     
@@ -179,7 +179,7 @@ public class DBStrategyMySQL implements DBAccess {
     }
     
 //    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-//        DBAccess db = new DBStrategyMySQL();
+//        DBAccess db = new DBMySQLStrategy();
 //        db.openConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/hotel","root","admin");
 //        
 //        List<String> colNames = new ArrayList<>();

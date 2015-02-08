@@ -17,7 +17,7 @@ public class HotelDAOStrategy implements HotelDAO {
     private String password;
     
     public HotelDAOStrategy(){
-        dba = new DBStrategyMySQL();
+        dba = new DBMySQLStrategy();
         driver = HotelDataAccessFactory.getDriver();
         url = HotelDataAccessFactory.getUrl();
         username = HotelDataAccessFactory.getUsername();
