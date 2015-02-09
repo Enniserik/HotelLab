@@ -87,25 +87,7 @@ public class DBMySQLStrategy implements DBAccess {
         
         try{
             
-            Object x = null;
-            
-            if(value instanceof String){
-                x = (String)value;
-            }else if(value instanceof Integer){
-                x = (Integer)value;
-            }else if(value instanceof Double){
-                x = (Double)value;
-            }else if(value instanceof Long){
-                x = (Long)value;
-            }else if(value instanceof Timestamp){
-                x = (Timestamp)value;
-            }else if(value instanceof Date){
-                x = (Date)value;
-            }else{
-                x = (Boolean)value;
-            }
-            
-            String sql = "UPDATE " + tableName + " SET " + colName + " = '" + x + "' WHERE " + pkKey + " = " + pk;
+            String sql = "UPDATE " + tableName + " SET " + colName + " = '" + value + "' WHERE " + pkKey + " = " + pk;
             pstmt = conn.prepareStatement(sql);
             updates = pstmt.executeUpdate();
             
